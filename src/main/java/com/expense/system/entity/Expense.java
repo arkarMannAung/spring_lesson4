@@ -20,7 +20,7 @@ public class Expense {
 	int id;
 	
 	@Column(name="date")
-	Date date;
+	String date;
 	
 	@Column(name="title")
 	String title;

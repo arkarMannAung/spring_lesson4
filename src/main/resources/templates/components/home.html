@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmins:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Spring</title>
+    <link th:replace="fragments/header :: bootstrap"/>
+</head>
+<body>
+    <div style="text-align:center" th:replace="fragments/header :: header"></div>
+    <div style="margin-left:300px;margin-right:300px;">
+    	<div class="d-flex mt-5 flex-row justify-content-between">
+    		<div>家計費一覧/ 詳細</div>
+    		<div class="btn btn-primary">add</div>
+    	</div>
+    	<div class="mt-5 py-3 px-3 d-flex text-info bg-secondary rounded-2 rounded-sm">
+    		合計　(<span th:text="${#numbers.formatDecimal(total, 0, 'COMMA', 0, 'POINT')}"></span>　JPY)
+    	</div>
+    	<div th:each="expense,index: ${expenseList}" class="mt-3 py-3 px-3 d-flex flex-row justify-content-between text-info border border-secondary rounded-2 rounded-sm">
+    		<div class="col-2" th:text="${expense.date}"></div>
+    		<div class="col-2" th:text="${expense.title}"></div>
+    		<div class="col-2 justify-end" th:text="${#numbers.formatDecimal(expense.expense, 0, 'COMMA', 0, 'POINT')}+ ' ' + JPY"></div>
+    		<div class="col-1"> > </div>
+    	</div>
+    </div>
+</body>
+</html>

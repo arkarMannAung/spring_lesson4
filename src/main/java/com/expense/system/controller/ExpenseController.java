@@ -1,6 +1,7 @@
 package com.expense.system.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,16 +14,19 @@ import com.expense.system.repository.ExpenseRepository;
 
 @Controller
 public class ExpenseController {
-//	@Autowired
-//	ExpenseRepository er;
+	@Autowired
+	ExpenseRepository er;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Model model) {
 //		Expense ep = new Expense();
-//		ep.setDate(new Date());
-//		ep.setTitle("eat");
-//		ep.setExpense(1500);
-//		er.save(ep);
-		return "index";
+		List<Expense> expenses = er.findAll();
+		model.addAttribute("expenseList", er.findAll());
+		int total = 0;
+		for(int x=0; x<expenses.size();x++  ) {
+			total += expenses.get(x).getExpense();
+		}
+		model.addAttribute("total", total);
+		return "components/home";
 	}
 }
