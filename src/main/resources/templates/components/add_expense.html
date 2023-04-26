@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmins:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Spring</title>
+    <link th:replace="fragments/fragment :: bootstrap"/>
+</head>
+<body>
+    <div style="text-align:center" th:replace="fragments/fragment :: header"></div>
+    
+    <div style="margin-left:300px;margin-right:300px;">
+    	<div class="d-flex mt-5 flex-row justify-content-between">
+    		<div><a class="mr-1" th:href="@{'/'}">家計費一覧</a> / 登録</div>
+    	</div>
+    	
+    	<div class="container mt-3">
+		<div class="card">
+			<div class="card-body">
+				<form th:action="@{/add_expense}" method="post" th:object="${form}" >
+					<div class="mb-3">
+						<label for="date" class="form-label">Date</label>
+						 <input type="date" class="form-control" th:field="*{date}"
+							id="date"  aria-describedby="date">
+						<div class="alert alert-warning" th:if="${!#strings.isEmpty(date_error)}" th:text="${date_error}"></div>
+					</div>
+    	
+					<div class="mb-3">
+						<label for="title" class="form-label">Titles</label>
+						<input type="text" class="form-control" th:field="*{title}" id="title">
+						<div class="alert alert-warning" th:if="${!#strings.isEmpty(title_error)}" th:text="${title_error}"></div>
+					</div>
+	
+					<div class="mb-3">
+						<label class="form-label" for="exampleCheck1">Expense</label>
+						<input type="number" min="0" th:field="*{expense}" class="form-control" >
+						<div class="alert alert-warning" th:if="${!#strings.isEmpty(expense_error)}" th:text="${expense_error}"></div>
+					</div>
+					<div class="d-flex flex-row justify-content-between mt-2">
+						<a th:href="@{''}" style="width: 200px" class="btn btn-warning">キャンセル</a>
+						<button style="width: 200px" type="submit" class="btn btn-primary">登録</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		</div>
+    </div>
+    <div style="text-align:center" th:replace="fragments/fragment :: footer"></div>
+</body>
+</html>
